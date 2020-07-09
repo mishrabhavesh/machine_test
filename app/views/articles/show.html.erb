@@ -1,0 +1,52 @@
+<div class="bg-info text-white">
+<div class="container">
+    <div class="row">
+        <div class="col">
+        <div> <%= @article.image %> </div>
+            <div class="h2 text-center"><strong>Title :</strong>  <%= @article.title %></div>
+            <div class= "card-body">
+               <div class="h4 py-3 text-center"><strong> Description :</strong></div>
+                <div class="card-footer py-3">
+                    <%= @article.description %>
+                </div>
+                 <div class="buttons mt-3">
+                  <% if logged_in? && current_user == @article.user%>
+                        <%=link_to 'Edit this article',edit_article_path(@article), class: "btn btn-primary mr-4 btn-outline-light"  %>
+                     <% end%>
+
+                        <%= link_to 'View all articles', articles_path, class: "btn btn-success btn-outline-light" %>
+                </div>
+      <% if logged_in? %>
+        <%= form_tag comments_path, method: :get do %>
+      <p>
+        <%= text_field_tag :search, params[:search], placeholder: "Comment" ,class: "w-25 my-5 mx-3" %>
+        <%= button_tag "Add comment", name: nil, class: "btn btn-dark" %>
+      </p>
+    <%end%>
+    <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<% if logged_in? && @comments.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Comments</th>
+        <th> Created at </th>
+        <th> <%= link_to 'Show articles on which you have commented', my_comments_path , class: "btn btn-outline-dark w-50"%> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @comments.each do |comment|%>
+      <tr>
+        <td><%= comment.comment %></td>
+        <td><%= time_ago_in_words(comment.created_at) %>  </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

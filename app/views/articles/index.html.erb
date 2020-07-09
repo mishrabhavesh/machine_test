@@ -1,0 +1,45 @@
+
+
+<div class=" bg-info">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+             <%= render 'shared/search' %>
+              <% if logged_in? %>
+               <div class="text-center"> <%=link_to 'Create a new article',new_article_path, class: "btn my-3  btn-lg  btn-outline-dark"  %> </div>
+               <%= link_to 'My liked articles', my_liked_path %>
+                <% end %>
+                <div class="text-center"><h2 class=" pt-3  text-dark"><strong>Listing all articles </strong></h2>
+                                    
+                </div>
+                    <% @articles.each do |f| %>
+                 <div class="card article my-4">
+                    <div class="card-header">
+                    <h2><strong class="text-primary"> <%= f.title %> </strong> </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title text-dark">
+                        <h3> <%= f.description %> </h3> 
+                        <small class=" card-footer my-0">
+                               Created at:  <%= time_ago_in_words(f.created_at) %>
+                               Updated at: <%= time_ago_in_words(f.updated_at) %> </small>
+                                 
+                        </div>
+                        <div class="card-footer">
+                            <div class="buttons mt-1">
+                            <% if logged_in? && current_user == f.user%>
+                                <%=link_to 'Edit this article',edit_article_path(f), class: "btn btn-outline-primary mr-4 "  %>
+                               <%end%>
+                                <%= link_to 'Show', article_path(f), class: "btn  btn-outline-info" %>
+                                <h2><%= f.like %> </h2>  <%= link_to 'Like', like_inc_path(f) ,class: "btn btn-info" %>
+                                <h2><%= f.dislike %> </h2>  <%= link_to 'disLike', dislikelike_inc_path(f)  ,class: "btn btn-warning"%>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<h1>my Comments</h1>
+
+
+<div class=" bg-info">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="text-center"><h2 class=" pt-3  text-dark"><strong>Listing all articles </strong></h2>
+                                 
+                </div>
+                 <div class="card article my-4">
+                   <% @comment.each do |comment| %>
+                    <div class="card-header">
+                    <h2><strong class="text-primary"> <%= comment.article.title %> </strong> </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title text-dark">
+                        <h3> <%= comment.article.description %> </h3> 
+                        <small class=" card-articleooter my-0">
+                               Created at:  <%= time_ago_in_words(comment.article.created_at) %>
+                               Updated at: <%= time_ago_in_words(comment.article.updated_at) %> </small>
+                                 
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

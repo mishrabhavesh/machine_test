@@ -1,0 +1,6 @@
+  
+  <div class=" w-50 text-center my-3 ">
+  <%= form_tag search_category_path, method: 'get' do %>
+      <%= select_tag "category_id", options_from_collection_for_select(Category.all, "id", "name",selected: params[:city_id]), onchange:  "this.form.submit();", prompt: "Search by category", class: "custom-select" %>      
+      <% end %>
+    </div>

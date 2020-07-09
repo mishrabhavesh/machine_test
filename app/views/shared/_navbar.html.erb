@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <%= link_to 'Blogging', root_path , class: "navbar-brand"%>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      
+      <% if logged_in?  %>
+        <%= link_to 'Log Out', logout_path, method: :delete, class: "btn btn-info mx-3" %>        
+      <% else %>
+        <%= link_to 'Sign up',signup_path, class: 'nav-link btn btn-primary rounded-pill mx-3'%>
+        <%= link_to 'Login', login_path , class: "btn btn-primary mx-3"%>
+      <% end %>
+    </form>
+  </div>
+</nav>
